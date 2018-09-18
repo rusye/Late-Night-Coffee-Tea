@@ -1,6 +1,6 @@
 'use strict';
 
-const YELP_SEARCH_URL = '';
+const YELP_SEARCH_URL = 'https://api.yelp.com/v3/businesses/search';
 
 const BING_API = '';
 
@@ -12,6 +12,7 @@ function watchSearch() {
  console.log('watchSearch is working');
  $('.search-button').on('click', function(event) {
      getLocation();
+     
  });
 };
 
@@ -28,8 +29,25 @@ function getLocation() {
 
 function showPosition(position) {
     console.log(position.coords.latitude, position.coords.longitude);
+    getDataFromYelp(position);
 }
 
+
+// This will get the data from Yelp
+function getDataFromYelp(position, callback) {
+    const query = {
+        categories: 'coffee, All',
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+    }
+    $.ajax({
+        url: YELP_SEARCH_URL,
+        dataType: 'json',
+        data: query,
+        headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx', 'origin': 'http://localhost'}
+    }, function(data){console.log(data)});
+    // $.getJSON(YELP_SEARCH_URL, query, callback);
+}
 
 // This will render the results
 function renderResults() {
@@ -44,13 +62,6 @@ function displayZomatoResults() {
 
 
 // This will populate Google Maps with points
-function displayGoogleMaps() {
+function displayBingMaps() {
 
 };
-
-
-// This will display the weather info for that city
-function displayWeather() {
-
-}
-
