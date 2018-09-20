@@ -35,21 +35,19 @@ function showPosition(position) {
 // This will get the data from Yelp
 function getDataFromYelp(position) {
     const query = {
-        categories: 'coffee, All' + 'bubbletea, [AU, BE, BR, CA, CL, CZ, DE, DK, FI, FR, GB, HK, IE, IT, JP, MY, NL, NO, NZ, PH, PL, PT, SE, SG, TW, US]',
+        categories: 'coffee, All,bubbletea',
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-        // open_now: true,
+        open_now: true,
     }
     $.ajax({
-        // url: `https://cors-anywhere.herokuapp.com/${YELP_SEARCH_URL}latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&categories=coffee,All`,
         url: YELP_SEARCH_URL,
         dataType: 'json',
         method: 'GET',
         data: query,
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data){console.log(data)}
-});
-    // $.getJSON(YELP_SEARCH_URL, query, callback);
+    });
 }
 
 
