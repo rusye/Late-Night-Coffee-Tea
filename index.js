@@ -2,7 +2,7 @@
 
 const YELP_SEARCH_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?';
 
-const MAPQUEST_API = '';
+// const MAPQUEST_API = 'https://www.mapquestapi.com/staticmap/v5/map?key=EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB&';
 
 let x = document.getElementById('location');
 
@@ -26,9 +26,11 @@ function getLocation() {
     }
 }
 
+
 function showPosition(position) {
     console.log(position.coords.latitude, position.coords.longitude);
     getDataFromYelp(position);
+    // renderMap();
 }
 
 
@@ -46,18 +48,38 @@ function getDataFromYelp(position) {
         method: 'GET',
         data: query,
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
-        success: function(data){console.log(data)}
+        success: function(data) {
+            console.log(data);
+            renderMap();
+        }
+        
     });
 }
 
+function renderMap() {
+    L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
-// This will render the results
+    var map = L.mapquest.map('map', {
+      center: [37.7749, -122.4194],
+      layers: L.mapquest.tileLayer('map'),
+      zoom: 12
+    });
+
+    map.addControl(L.mapquest.control());
+}
+
+
+
+// This will render the results, don't think I need this function if I'm using
+// map as a background image with an overlay of sorts.
+
+
 function renderResults() {
-
+    
 };
 
 
 // This will populate Map Quest with points
-function displayMapQuest(data) {
+function populateMapQuest(data) {
 
 };
