@@ -56,27 +56,27 @@ function getDataFromYelp(position) {
 }
 
 function renderMap(position) {
-    // L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
+    L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
-    // var map = L.mapquest.map('map', {
-    //   center: [37.7749, -122.4194],
-    //   layers: L.mapquest.tileLayer('map'),
-    //   zoom: 12
-    // });
+    var map = L.mapquest.map('map', {
+      center: [37.7749, -122.4194],
+      layers: L.mapquest.tileLayer('map'),
+      zoom: 12
+    });
 
     // map.addControl(L.mapquest.control());
      // create an object for options
-     var options = {
-        elt: document.getElementById('map'),       // ID of map element on page
-        zoom: 10,                                  // initial zoom level of the map
-        latLng: { lat: position.coords.latitude, lng: position.coords.longitude },  // center of map in latitude/longitude
-        mtype: 'map',                              // map type (map, sat, hyb); defaults to map
-        bestFitMargin: 0,                          // margin offset from map viewport when applying a bestfit on shapes
-        zoomOnDoubleClick: true                    // enable map to be zoomed in when double-clicking
-      };
+    //  var options = {
+    //     elt: document.getElementById('map'),       // ID of map element on page
+    //     zoom: 10,                                  // initial zoom level of the map
+    //     latLng: { lat: position.coords.latitude, lng: position.coords.longitude },  // center of map in latitude/longitude
+    //     mtype: 'map',                              // map type (map, sat, hyb); defaults to map
+    //     bestFitMargin: 0,                          // margin offset from map viewport when applying a bestfit on shapes
+    //     zoomOnDoubleClick: true                    // enable map to be zoomed in when double-clicking
+    //   };
   
-      // construct an instance of MQA.TileMap with the options object
-      window.map = new MQA.TileMap(options);
+    //   // construct an instance of MQA.TileMap with the options object
+    //   window.map = new MQA.TileMap(options);
 }
 
 
