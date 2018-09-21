@@ -50,6 +50,8 @@ function getDataFromYelp(position) {
         success: function(data) {
             console.log(data);
             renderMap(position);
+            // populateMapQuest(data);
+            populateMap(data);
         }
         
     });
@@ -65,20 +67,18 @@ function renderMap(position) {
     });
 
     map.addControl(L.mapquest.control());
-    L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    L.marker(populateMap).addTo(map);
 }
-
-
 
 
 // This will render the results, don't think I need this function if I'm using
 // map as a background image with an overlay of sorts.
-function renderResults() {
-    
-};
+function populateMap(data) {
+    let coordinatesArray = data.businesses.map(businesses => {
+        let lat = businesses.coordinates.latitude;
+        let long = businesses.coordinates.longitude;
 
-
-// This will populate Map Quest with points
-function populateMapQuest(data) {
-
+        return [lat, long];
+    });
+    console.log(coordinatesArray);
 };
