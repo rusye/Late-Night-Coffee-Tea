@@ -67,7 +67,8 @@ function renderMap(position) {
     });
 
     map.addControl(L.mapquest.control());
-    L.marker(populateMap).addTo(map);
+    // L.marker(populateMap).addTo(map);
+    L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
 }
 
 
