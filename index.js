@@ -49,15 +49,12 @@ function getDataFromYelp(position) {
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
             console.log(data);
-            renderMap(position);
-            // populateMapQuest(data);
-            populateMap(data);
+            renderMap(position, data);
         }
-        
     });
 }
 
-function renderMap(position) {
+function renderMap(position, data) {
     L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
     var map = L.mapquest.map('map', {
@@ -65,21 +62,20 @@ function renderMap(position) {
       layers: L.mapquest.tileLayer('map'),
       zoom: 12
     });
-
+    
     map.addControl(L.mapquest.control());
-    // L.marker(populateMap).addTo(map);
+    // Have my position show up in a differnt style of marker
     L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    populateMap(data, map);
 }
 
 
 // This will render the results, don't think I need this function if I'm using
 // map as a background image with an overlay of sorts.
-function populateMap(data) {
-    let coordinatesArray = data.businesses.map(businesses => {
-        let lat = businesses.coordinates.latitude;
-        let long = businesses.coordinates.longitude;
-
-        return [lat, long];
-    });
-    console.log(coordinatesArray);
+function populateMap(data, map) {
+    data.businesses.forEach(business => {
+        let lat = business.coordinates.latitude;
+        let long = business.coordinates.longitude;
+        L.marker([lat, long]).addTo(map);
+    });    
 };
