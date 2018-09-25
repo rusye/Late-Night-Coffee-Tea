@@ -65,7 +65,17 @@ function renderMap(position, data) {
     
     map.addControl(L.mapquest.control());
     // Have my position show up in a differnt style of marker
-    L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    L.mapquest.textMarker([position.coords.latitude, position.coords.longitude], {
+        text: 'You are here',
+        type: 'via',
+        position: 'bottom',
+        alt: 'You are here',
+        icon: {
+            primaryColor: 'F8E71C',
+            secondaryColor: '417505',
+            size: 'md',
+        },
+    }).addTo(map);
     populateMap(data, map);
 }
 
@@ -76,6 +86,20 @@ function populateMap(data, map) {
     data.businesses.forEach(business => {
         let lat = business.coordinates.latitude;
         let long = business.coordinates.longitude;
-        L.marker([lat, long]).addTo(map);
+        L.mapquest.textMarker([lat, long], {
+            text: business.name,
+            type: 'marker',
+            position: 'bottom',
+            // title: business.name,
+            alt: business.alias,
+            icon: {
+                primaryColor: '#333333',
+                secondaryColor: '#333333',
+                size: 'sm'
+            },
+            // title: 'test'
+        }).addTo(map);
     });    
 };
+
+// {riseOnHover: true}bindPopup(business.alias)
