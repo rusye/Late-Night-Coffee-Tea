@@ -2,14 +2,11 @@
 
 const YELP_SEARCH_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?';
 
-// const MAPQUEST_API = 'https://www.mapquestapi.com/staticmap/v5/map?key=EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB&';
-
 let x = document.getElementById('location');
 
 
 // This will watch the submit button pull your location and to render results
 function watchSearch() {
- console.log('watchSearch is working');
  $('.search-button').on('click', function(event) {
      getLocation();
  });
@@ -18,6 +15,7 @@ function watchSearch() {
 $(watchSearch);
 
 
+// This will request for your location
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -27,8 +25,9 @@ function getLocation() {
 }
 
 
+// This will push your location to Yelp
 function showPosition(position) {
-    console.log(position.coords.latitude, position.coords.longitude);
+    $('.search-area').toggle();
     getDataFromYelp(position);
 }
 
@@ -48,12 +47,13 @@ function getDataFromYelp(position) {
         data: query,
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
-            console.log(data);
             renderMap(position, data);
         }
     });
 }
 
+
+// This will display the map
 function renderMap(position, data) {
     L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
@@ -64,24 +64,28 @@ function renderMap(position, data) {
     });
     
     map.addControl(L.mapquest.control());
-    // Have my position show up in a differnt style of marker
+    pinYourLocation(map, position);
+    populateMap(data, map);
+}
+
+
+// This will show your location on the map
+function pinYourLocation(map, position) {
     L.mapquest.textMarker([position.coords.latitude, position.coords.longitude], {
         text: 'You are here',
-        type: 'via',
+        type: 'marker',
         position: 'bottom',
         alt: 'You are here',
         icon: {
             primaryColor: 'F8E71C',
             secondaryColor: '417505',
-            size: 'md',
+            size: 'sm',
         },
     }).addTo(map);
-    populateMap(data, map);
 }
 
 
-// This will render the results, don't think I need this function if I'm using
-// map as a background image with an overlay of sorts.
+// This will populate the results on the map
 function populateMap(data, map) {
     data.businesses.forEach(business => {
         let lat = business.coordinates.latitude;
@@ -90,16 +94,12 @@ function populateMap(data, map) {
             text: business.name,
             type: 'marker',
             position: 'bottom',
-            // title: business.name,
             alt: business.alias,
             icon: {
                 primaryColor: '#333333',
                 secondaryColor: '#333333',
-                size: 'sm'
+                size: 'sm',
             },
-            // title: 'test'
-        }).addTo(map);
+        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count}`).openPopup().addTo(map);
     });    
 };
-
-// {riseOnHover: true}bindPopup(business.alias)
