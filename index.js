@@ -54,7 +54,7 @@ function getDataFromYelp(position) {
 
 
 // This will display the map
-function renderMap(position, data) {
+function renderMap(position, data, resize) {
     L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
     var map = L.mapquest.map('map', {
@@ -66,7 +66,11 @@ function renderMap(position, data) {
     map.addControl(L.mapquest.control());
     pinYourLocation(map, position);
     populateMap(data, map);
+    $("#map").trigger("resize");
 }
+
+
+$(window).on("resize", function () { $("#map").height($(window).height()-20);}).trigger("resize");
 
 
 // This will show your location on the map
@@ -82,6 +86,7 @@ function pinYourLocation(map, position) {
             size: 'sm',
         },
     }).addTo(map);
+    $("#mapid").trigger("resize");
 }
 
 
