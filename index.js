@@ -29,6 +29,7 @@ function getLocation() {
 function showPosition(position) {
     $('.search-area').toggle();
     getDataFromYelp(position);
+    $('.results').toggle();
 }
 
 
@@ -105,6 +106,6 @@ function populateMap(data, map) {
                 secondaryColor: '#333333',
                 size: 'sm',
             },
-        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count}`).openPopup().addTo(map);
+        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br>Read Reviews: ${business.url}`).openPopup().addTo(map);
     });    
 };
