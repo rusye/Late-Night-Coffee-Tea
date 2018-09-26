@@ -19,16 +19,19 @@
     <main role="main">
       <!-- The search area -->
       <div class="search-area">
+        <div class="search-text">
           <h1>Long night ahead?</h1> 
           <h2>Find coffee or tea that is open now.</h2>
             <button type="button" class="search-button">Search</button>
+        </div>
       </div>
 
       <!-- The results area -->
-      
-      <div class="map results" hidden><p id="location"></p></div>
-      <div id="map" class="results" hidden></div>
-    
+      <div class="map-box" hidden>
+        <div class="map"><p id="location"></p></div>
+        <div id="map"></div>
+      </div>
+
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
       <script type="text/javascript" src="index.js"></script>
     </main>    

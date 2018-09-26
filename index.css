@@ -12,24 +12,25 @@ body {
     background-position: center;
 }
 
-main {
-    display: flex; /* Keep */
+.search-area {
+    display: flex;
     padding: 10px;
     height: 100vh;
-    flex-direction: column; /* Keep */
-    justify-content: center; /* Keep */
-    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
     resize: vertical;
     overflow: auto;
-    align-items: center; /* Keep */
-    align-content: center; /* Keep */
+    align-content: center;
+    align-items: center;
 }
 
-.search-area {
+.search-text {
+    max-width: 500px;
+    text-align: center;
+}
+
+.map-box {
     padding: 10px;
-    max-width: 500px; /* Keep */
-    background-color: white; /* Delete later */
-    text-align: center; /* Keep */
 }
 
 #map {
@@ -42,4 +43,14 @@ button {
     margin-right: auto;
     margin-left: auto;
     width: 100px;
+}
+
+h1, h2 {
+    padding: 10px;
+    max-width: 500px;
+    background-color: white;
+}
+
+h2 {
+    margin-bottom: 20px;
 }

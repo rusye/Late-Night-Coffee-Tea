@@ -29,7 +29,7 @@ function getLocation() {
 function showPosition(position) {
     $('.search-area').toggle();
     getDataFromYelp(position);
-    $('.results').toggle();
+    $('.map-box').toggle();
 }
 
 
