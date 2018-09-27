@@ -2,7 +2,7 @@
 
 const YELP_SEARCH_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?';
 
-const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
+const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
 
 let x = document.getElementById('fail');
 
@@ -115,7 +115,7 @@ function renderMap(position, data, resize) {
     var map = L.mapquest.map('map', {
       center: ([lat, lng]),
       layers: L.mapquest.tileLayer('map'),
-      zoom: 14
+      zoom: 13
     });
     
     map.addControl(L.mapquest.control());
