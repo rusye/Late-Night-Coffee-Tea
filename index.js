@@ -11,6 +11,9 @@ let lat = [];
 let lng = [];
 
 
+// remove unnesesary position tags
+
+
 // This will watch the submit button pull your location and to render results
 function watchUseYourLocation() {
  $('.your-location').on('click', function(event) {
@@ -21,6 +24,7 @@ function watchUseYourLocation() {
 $(watchUseYourLocation);
 
 
+// This will watch the search input for the geosearch info
 function watchGeoSearch(){
     $('.geo-search').on('click', function(event) {
         let query = {
@@ -49,6 +53,7 @@ function getLocation() {
 }
 
 
+// This will show the error message when the geo locaiton isn't available
 function showError(error) {
     $('.search-text').toggle();
     $('.fail').toggle();
@@ -71,7 +76,8 @@ function showError(error) {
 
 // This will hide the search related stuff and render the map
 function searchActivated() {
-    $('.search-area').toggle();
+    $('.search-text').toggle();
+    $('#floatingBarsG').toggle();
     getDataFromYelp();
     $('.map-box').toggle();
 }
@@ -118,6 +124,7 @@ function renderMap(position, data, resize) {
       zoom: 13
     });
     
+    $('.search-area').toggle();
     map.addControl(L.mapquest.control());
     pinYourLocation(map, position);
     populateMap(data, map);
@@ -125,6 +132,7 @@ function renderMap(position, data, resize) {
 }
 
 
+// This is to resize Mapquest 
 $(window).on("resize", function () { $("#map").height($(window).height()-20);}).trigger("resize");
 
 
