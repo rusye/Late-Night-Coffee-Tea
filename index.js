@@ -79,7 +79,7 @@ function searchActivated() {
     $('.search-text').toggle();
     $('#floatingBarsG').toggle();
     getDataFromYelp();
-    $('.map-box').toggle();
+    // $('.map-box').toggle();
 }
 
 
@@ -108,6 +108,8 @@ function getDataFromYelp(position) {
         data: query,
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
+            $('.map-box').toggle();
+    $('.search-area').toggle();
             renderMap(position, data);
         }
     });
@@ -124,7 +126,6 @@ function renderMap(position, data, resize) {
       zoom: 13
     });
     
-    $('.search-area').toggle();
     map.addControl(L.mapquest.control());
     pinYourLocation(map, position);
     populateMap(data, map);
