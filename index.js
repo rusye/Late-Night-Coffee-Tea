@@ -2,34 +2,86 @@
 
 const YELP_SEARCH_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?';
 
-let x = document.getElementById('location');
+const GEO_SEARCH_URL = 'http://www.mapquestapi.com/geocoding/v1/address';
+
+let x = document.getElementById('fail');
+
+let lat = [];
+
+let lng = [];
 
 
 // This will watch the submit button pull your location and to render results
-function watchSearch() {
- $('.search-button').on('click', function(event) {
+function watchUseYourLocation() {
+ $('.your-location').on('click', function(event) {
      getLocation();
  });
 };
 
-$(watchSearch);
+$(watchUseYourLocation);
+
+
+function watchGeoSearch(){
+    $('.geo-search').on('click', function(event) {
+        let query = {
+            key: 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB',
+            location: $('#geo-code').val()
+        }
+        $.getJSON(GEO_SEARCH_URL, query, function(data) {
+            lat = data.results[0].locations[0].latLng.lat;
+            lng = data.results[0].locations[0].latLng.lng;
+            searchActivated();
+        });
+    })
+}
+
+$(watchGeoSearch);
 
 
 // This will request for your location
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        $('.search-text').toggle();
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 
+function showError(error) {
+    $('.search-text').toggle();
+    $('.fail').toggle();
+    switch(error.code) {        
+      case error.PERMISSION_DENIED:
+        x.innerHTML = "User denied the request for Geolocation."
+        break;
+      case error.POSITION_UNAVAILABLE:
+        x.innerHTML = "Location information is unavailable."
+        break;
+      case error.TIMEOUT:
+        x.innerHTML = "The request to get user location timed out."
+        break;
+      case error.UNKNOWN_ERROR:
+        x.innerHTML = "An unknown error occurred."
+        break;
+    }
+  }
+
+
+// This will hide the search related stuff and render the map
+function searchActivated() {
+    $('.search-area').toggle();
+    getDataFromYelp();
+    $('.map-box').toggle();
+}
+
+
 // This will push your location to Yelp
 function showPosition(position) {
-    $('.search-area').toggle();
-    getDataFromYelp(position);
-    $('.map-box').toggle();
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
+    searchActivated();
 }
 
 
@@ -37,9 +89,11 @@ function showPosition(position) {
 function getDataFromYelp(position) {
     const query = {
         categories: 'coffee, All,bubbletea',
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
+        radius: 8047,
+        latitude: lat,
+        longitude: lng,
         open_now: true,
+        limit: 30,
     }
     $.ajax({
         url: YELP_SEARCH_URL,
@@ -59,9 +113,9 @@ function renderMap(position, data, resize) {
     L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
     var map = L.mapquest.map('map', {
-      center: ([position.coords.latitude, position.coords.longitude]),
+      center: ([lat, lng]),
       layers: L.mapquest.tileLayer('map'),
-      zoom: 12
+      zoom: 14
     });
     
     map.addControl(L.mapquest.control());
@@ -76,7 +130,7 @@ $(window).on("resize", function () { $("#map").height($(window).height()-20);}).
 
 // This will show your location on the map
 function pinYourLocation(map, position) {
-    L.mapquest.textMarker([position.coords.latitude, position.coords.longitude], {
+    L.mapquest.textMarker([lat, lng], {
         text: 'You are here',
         type: 'marker',
         position: 'bottom',
@@ -94,9 +148,9 @@ function pinYourLocation(map, position) {
 // This will populate the results on the map
 function populateMap(data, map) {
     data.businesses.forEach(business => {
-        let lat = business.coordinates.latitude;
+        let lati = business.coordinates.latitude;
         let long = business.coordinates.longitude;
-        L.mapquest.textMarker([lat, long], {
+        L.mapquest.textMarker([lati, long], {
             text: business.name,
             type: 'marker',
             position: 'bottom',
@@ -106,6 +160,6 @@ function populateMap(data, map) {
                 secondaryColor: '#333333',
                 size: 'sm',
             },
-        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br>Read Reviews: ${business.url}`).openPopup().addTo(map);
+        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br><a href=${business.url}>Yelp</a>`).openPopup().addTo(map);
     });    
 };

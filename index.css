@@ -42,7 +42,10 @@ body {
 button {
     margin-right: auto;
     margin-left: auto;
-    width: 100px;
+    width: 200px;
+    width: fit-content;
+    padding: 5px 15px 5px 15px;
+    height: 30px;
 }
 
 h1, h2 {
@@ -53,4 +56,19 @@ h1, h2 {
 
 h2 {
     margin-bottom: 20px;
+}
+
+input {
+    height: 30px;
+    width: 200px;
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+}
+
+.geo-search {
+    position: relative;
+    top: 1px;
 }

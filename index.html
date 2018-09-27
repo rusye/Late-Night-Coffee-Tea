@@ -21,14 +21,22 @@
       <div class="search-area">
         <div class="search-text">
           <h1>Long night ahead?</h1> 
-          <h2>Find coffee or tea that is open now.</h2>
-            <button type="button" class="search-button">Search</button>
+          <h2>Find a coffeehouse or teahouse that is open now & within 5 miles of your location.</h2>
+          <button type="button" class="your-location">Use My Location</button>
+          <h3>Or</h2>
+          <form action="#">
+            <fieldset>
+              <input id="geo-code" type="text" placeholder="Postal Code or City, State" class="postal-code" aria-label="Zip code search">
+              <button class="geo-search" type="submit">Search</button>
+              </fieldset>
+          </form>
         </div>
+        <h3 id="fail"></h3>
       </div>
 
       <!-- The results area -->
       <div class="map-box" hidden>
-        <div class="map"><p id="location"></p></div>
+        <div class="map"><p id="location"></div>
         <div id="map"></div>
       </div>
 
