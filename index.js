@@ -4,7 +4,7 @@ const YELP_SEARCH_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.co
 
 const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
 
-let x = document.getElementById('fail');
+let x = document.getElementById('fail-text');
 
 let lat = [];
 
@@ -44,19 +44,19 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        $('.search-text').toggle();
+        $('.search-text, .fail').toggle();
         x.innerHTML = "Geolocation is not supported by this browser.";
+        watchHomeButton();
     }
 }
 
 
 // This will show the error message when the geo locaiton isn't available
 function showError(error) {
-    $('.search-text').toggle();
-    $('.fail').toggle();
+    $('.search-text, .fail').toggle();
     switch(error.code) {        
       case error.PERMISSION_DENIED:
-        x.innerHTML = "User denied the request for Geolocation."
+        x.innerHTML = "You have denied the request for Geolocation."
         break;
       case error.POSITION_UNAVAILABLE:
         x.innerHTML = "Location information is unavailable."
@@ -68,8 +68,14 @@ function showError(error) {
         x.innerHTML = "An unknown error occurred."
         break;
     }
+    watchHomeButton();
   }
 
+function watchHomeButton() {
+    $('.home-button').on('click', function(event) {
+        $('.search-text, .fail').toggle();
+    });
+}
 
 // This will hide the search related stuff and render the map
 function searchActivated() {
@@ -105,7 +111,7 @@ function getDataFromYelp() {
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
             $('.map-box').toggle();
-            $('.search-area').toggle();
+            $('.search-area, #floatingBarsG').toggle();
             renderMap(data);
         }
     });
@@ -130,7 +136,7 @@ function renderMap(data, resize) {
 
 
 // This is to resize Mapquest 
-$(window).on("resize", function () { $("#map").height($(window).height()-20);}).trigger("resize");
+$(window).on("resize", function () { $("#map").height($(window).height()-65);}).trigger("resize");
 
 
 // This will show your location on the map
@@ -166,5 +172,13 @@ function populateMap(data, map) {
                 size: 'sm',
             },
         }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br><a href=${business.url}>Yelp</a>`).openPopup().addTo(map);
-    });    
+    });
+    watchMapHomeButton();  
 };
+
+
+function watchMapHomeButton() {
+    $('.map-home-button').on('click', function(event) {
+        $('.map-box, .search-area, .search-text').toggle();
+    });
+}

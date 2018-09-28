@@ -7,7 +7,7 @@
 	<meta name="description" content="Search for coffee or tea that is currently open by you">
 	<title>Late Night Coffee & Tea Search</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Metrophobic" "rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Courgette|Poiret+One" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="index.css">
   <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
   <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
@@ -19,33 +19,41 @@
     <main role="main">
       <!-- The search area -->
       <div class="search-area">
+
         <div class="search-text">
           <h1>Long night ahead?</h1> 
           <h2>Find a coffeehouse or teahouse that is open now & within 5 miles of your location.</h2>
-          <button type="button" class="your-location">Use My Location</button>
-          <h3>Or</h2>
+          <button type="button" class="your-location my-button">Use My Location</button>
+          <h3 class="or">- - - Or - - -</h3>
+
           <form action="#">
             <fieldset>
-              <input id="geo-code" type="text" placeholder="Postal Code or City, State" class="postal-code" aria-label="Zip code search">
-              <button class="geo-search" type="submit">Search</button>
+              <input id="geo-code" type="text" placeholder="Postal Code or City, State" class="postal-code" aria-label="city and state or postal code search" required>
+              <button class="geo-search my-button" type="submit">Search</button>
             </fieldset>
           </form>
         </div>
+
         <div id="floatingBarsG" hidden>
-            <div class="blockG" id="rotateG_01"></div>
-            <div class="blockG" id="rotateG_02"></div>
-            <div class="blockG" id="rotateG_03"></div>
-            <div class="blockG" id="rotateG_04"></div>
-            <div class="blockG" id="rotateG_05"></div>
-            <div class="blockG" id="rotateG_06"></div>
-            <div class="blockG" id="rotateG_07"></div>
-            <div class="blockG" id="rotateG_08"></div>
-          </div>
-        <h3 id="fail"></h3>
+          <div class="blockG" id="rotateG_01"></div>
+          <div class="blockG" id="rotateG_02"></div>
+          <div class="blockG" id="rotateG_03"></div>
+          <div class="blockG" id="rotateG_04"></div>
+          <div class="blockG" id="rotateG_05"></div>
+          <div class="blockG" id="rotateG_06"></div>
+          <div class="blockG" id="rotateG_07"></div>
+          <div class="blockG" id="rotateG_08"></div>
+        </div>
+
+        <div class="fail" hidden>
+          <h3 id="fail-text"></h3>
+          <button type="button" class="home-button my-button">Home Page</button>
+        </div>
       </div>
 
       <!-- The results area -->
       <div class="map-box" hidden>
+        <button type="button" class="my-button map-home-button">Home Page</button>
         <div class="map"><p id="location"></div>
         <div id="map"></div>
       </div>
