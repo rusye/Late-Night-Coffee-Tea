@@ -11,9 +11,6 @@ let lat = [];
 let lng = [];
 
 
-// remove unnesesary position tags
-
-
 // This will watch the submit button pull your location and to render results
 function watchUseYourLocation() {
  $('.your-location').on('click', function(event) {
@@ -79,7 +76,6 @@ function searchActivated() {
     $('.search-text').toggle();
     $('#floatingBarsG').toggle();
     getDataFromYelp();
-    // $('.map-box').toggle();
 }
 
 
@@ -92,7 +88,7 @@ function showPosition(position) {
 
 
 // This will get the data from Yelp
-function getDataFromYelp(position) {
+function getDataFromYelp() {
     const query = {
         categories: 'coffee, All,bubbletea',
         radius: 8047,
@@ -109,15 +105,15 @@ function getDataFromYelp(position) {
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
             $('.map-box').toggle();
-    $('.search-area').toggle();
-            renderMap(position, data);
+            $('.search-area').toggle();
+            renderMap(data);
         }
     });
 }
 
 
 // This will display the map
-function renderMap(position, data, resize) {
+function renderMap(data, resize) {
     L.mapquest.key = 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB';
 
     var map = L.mapquest.map('map', {
@@ -127,7 +123,7 @@ function renderMap(position, data, resize) {
     });
     
     map.addControl(L.mapquest.control());
-    pinYourLocation(map, position);
+    pinYourLocation(map);
     populateMap(data, map);
     $("#map").trigger("resize");
 }
@@ -138,7 +134,7 @@ $(window).on("resize", function () { $("#map").height($(window).height()-20);}).
 
 
 // This will show your location on the map
-function pinYourLocation(map, position) {
+function pinYourLocation(map) {
     L.mapquest.textMarker([lat, lng], {
         text: 'You are here',
         type: 'marker',
