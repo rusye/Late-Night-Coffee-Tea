@@ -80,6 +80,8 @@ function watchHomeButton() {
         if ($('.map-box').is(':visible')) {
             $('.map-box, .search-area, .search-text').toggle();
             $('.fail').hide();
+            map.remove();
+            document.getElementById('map-box').innerHTML += '<div id="map"></div>';
         
         } else {
             $('.search-text').show();
