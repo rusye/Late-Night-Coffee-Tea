@@ -23,7 +23,8 @@ $(watchUseYourLocation);
 
 // This will watch the search input for the geosearch info
 function watchGeoSearch(){
-    $('.geo-search').on('click', function(event) {
+    $('#geo-search').submit(function(event) {
+        event.preventDefault();
         let query = {
             key: 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB',
             location: $('#geo-code').val()
@@ -32,7 +33,9 @@ function watchGeoSearch(){
             lat = data.results[0].locations[0].latLng.lat;
             lng = data.results[0].locations[0].latLng.lng;
             searchActivated();
+            $('#geo-code').val('')
         });
+        
     })
 }
 
@@ -73,7 +76,15 @@ function showError(error) {
 
 function watchHomeButton() {
     $('.home-button').on('click', function(event) {
-        $('.search-text, .fail').toggle();
+
+        if ($('.map-box').is(':visible')) {
+            $('.map-box, .search-area, .search-text').toggle();
+            $('.fail').hide();
+        
+        } else {
+            $('.search-text').show();
+            $('.fail').hide();
+        }
     });
 }
 
@@ -173,12 +184,5 @@ function populateMap(data, map) {
             },
         }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br><a href=${business.url}>Yelp</a>`).openPopup().addTo(map);
     });
-    watchMapHomeButton();  
+    watchHomeButton();  
 };
-
-
-function watchMapHomeButton() {
-    $('.map-home-button').on('click', function(event) {
-        $('.map-box, .search-area, .search-text').toggle();
-    });
-}
