@@ -21,20 +21,23 @@
       <div class="search-area">
 
         <div class="search-text">
-          <h1>Long night ahead?</h1> 
-          <h2>Find a coffeehouse or teahouse that is open now & within 5 miles of your location.</h2>
+          <header>Long night ahead?</header>
+
+          <h1>Find a coffeehouse or teahouse that is open now & within 5 miles of your location.</h1>
           <button type="button" class="your-location my-button">Use My Location</button>
-          <h3 class="or">- - - Or - - -</h3>
+          <p>- - - Or - - -</p>
 
           <form action="#" id="geo-search">
             <fieldset>
+              <label for="geo-code">
               <input id="geo-code" type="text" placeholder="Postal Code or City, State" class="postal-code" aria-label="city and state or postal code search" required>
+              </label>
               <button class="geo-search my-button" type="submit">Search</button>
             </fieldset>
           </form>
         </div>
 
-        <div id="floatingBarsG" hidden>
+        <div id="floatingBarsG" aria-label="loading search data" hidden>
           <div class="blockG" id="rotateG_01"></div>
           <div class="blockG" id="rotateG_02"></div>
           <div class="blockG" id="rotateG_03"></div>

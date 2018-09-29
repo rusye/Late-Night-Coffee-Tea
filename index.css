@@ -98,25 +98,28 @@ body {
 	top:1px;
 }
 
-h1, h2 {
+h1, header {
     max-width: 500px;
 }
 
-h2 {
-    margin-bottom: 20px;
+h1 {
+	margin-bottom: 20px;
+	font-size: 25px;
 }
 
-h3 {
+p {
 	text-align: center;
 	margin: 10px;
+	font-size: 18px;
+	font-weight: bold;
 }
 
-h1 {
+header {
 	font-family: 'Courgette', cursive;
 	font-size: 55px;
 }
 
-h2, h3 {
+h1, p {
 	font-family: 'Poiret One', cursive;
 }
 
@@ -131,6 +134,7 @@ input {
 
 fieldset {
 	border: none;
+	padding-top: 0;
 }
 
 .geo-search {
