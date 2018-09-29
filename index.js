@@ -29,13 +29,13 @@ function watchGeoSearch(){
             key: 'EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB',
             location: $('#geo-code').val()
         }
+        
         $.getJSON(GEO_SEARCH_URL, query, function(data) {
             lat = data.results[0].locations[0].latLng.lat;
             lng = data.results[0].locations[0].latLng.lng;
             searchActivated();
             $('#geo-code').val('')
         });
-        
     })
 }
 
