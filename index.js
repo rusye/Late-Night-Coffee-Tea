@@ -18,8 +18,6 @@ function watchUseYourLocation() {
  });
 };
 
-$(watchUseYourLocation);
-
 
 // This will watch the search input for the geosearch info
 function watchGeoSearch(){
@@ -38,8 +36,6 @@ function watchGeoSearch(){
         });
     })
 }
-
-$(watchGeoSearch);
 
 
 // This will request for your location
@@ -81,7 +77,7 @@ function watchHomeButton() {
             $('.map-box, .search-area, .search-text').toggle();
             $('.fail').hide();
             map.remove();
-            document.getElementById('map-box').innerHTML += '<div id="map"></div>';
+            document.getElementById('map-box').innerHTML += '<div class="map"><p id="location"></div> <div id="map"></div>';
         
         } else {
             $('.search-text').show();
@@ -124,6 +120,7 @@ function getDataFromYelp() {
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
             $('.map-box').toggle();
+            mapResize();
             $('.search-area, #floatingBarsG').toggle();
             renderMap(data);
         }
@@ -141,6 +138,7 @@ function renderMap(data, resize) {
       zoom: 13
     });
     
+    
     map.addControl(L.mapquest.control());
     pinYourLocation(map);
     populateMap(data, map);
@@ -149,7 +147,9 @@ function renderMap(data, resize) {
 
 
 // This is to resize Mapquest 
-$(window).on("resize", function () { $("#map").height($(window).height()-65);}).trigger("resize");
+function mapResize() {
+    $(window).on("resize", function () { $("#map").height($(window).height()-65);}).trigger("resize");
+}
 
 
 // This will show your location on the map
@@ -188,3 +188,12 @@ function populateMap(data, map) {
     });
     watchHomeButton();  
 };
+
+
+// Loads the listeners
+function loadListners() {
+    watchUseYourLocation();
+    watchGeoSearch();
+}
+
+$(loadListners);
