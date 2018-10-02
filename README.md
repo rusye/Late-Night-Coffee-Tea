@@ -14,13 +14,13 @@ You could also use it to look ahead, let's say you're going to meet up with a fr
 
 ## Screenshots
 Home Page
-![Home Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/home_page_final.PNG)
+![Home Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/screenshots/home_page_final.PNG)
 
 Results Page
-![Results Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/results_page_final.PNG)
+![Results Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/screenshots/results_page_final.PNG)
 
 Popup Details
-![Popup Details](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/popup_details.PNG)
+![Popup Details](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/screenshots/popup_details.PNG)
 
 ## Demo
 
