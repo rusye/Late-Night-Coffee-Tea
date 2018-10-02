@@ -4,6 +4,6 @@ This website will help you locate coffee or tea in your area that is currently o
 
 [Live app](https://rusye.github.io/Late-Night-Coffee-Tea/)
 
-![Home Page](Late-Night-Coffee-Tea/home_page_final.PNG)
+![Home Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/home_page_final.PNG)
 
 ![Results Page](Late-Night-Coffee-Tea/results_page_final.PNG)
