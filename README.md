@@ -19,6 +19,9 @@ Home Page
 Results Page
 ![Results Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/results_page_final.PNG)
 
+Popup Details
+![Popup Details](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/popup_details.PNG)
+
 ## Demo
 
 [Live app](https://rusye.github.io/Late-Night-Coffee-Tea/)
