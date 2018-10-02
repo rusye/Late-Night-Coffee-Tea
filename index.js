@@ -44,7 +44,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
         $('.search-text, .fail').toggle();
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        x.innerHTML = 'Geolocation is not supported by this browser.';
         watchHomeButton();
     }
 }
@@ -55,16 +55,16 @@ function showError(error) {
     $('.search-text, .fail').toggle();
     switch(error.code) {        
       case error.PERMISSION_DENIED:
-        x.innerHTML = "You have denied the request for Geolocation."
+        x.innerHTML = 'You have denied the request to use your geolocation.'
         break;
       case error.POSITION_UNAVAILABLE:
-        x.innerHTML = "Location information is unavailable."
+        x.innerHTML = 'Location information is unavailable.'
         break;
       case error.TIMEOUT:
-        x.innerHTML = "The request to get user location timed out."
+        x.innerHTML = 'The request to get user location timed out.'
         break;
       case error.UNKNOWN_ERROR:
-        x.innerHTML = "An unknown error occurred."
+        x.innerHTML = 'An unknown error occurred.'
         break;
     }
     watchHomeButton();
@@ -119,10 +119,18 @@ function getDataFromYelp() {
         data: query,
         headers: {'Authorization': 'Bearer 9j3HnqBfLRcO9JiDFUYz69dzLNshTTlbqSWE7NtU8-tiqCh-CIHJ3sRddNUDs0laaBWhRf6ElNWJu63tKRuJeO4QBVo-EfApe_MFyMdBSFescObdKHNIGYENcqidW3Yx'},
         success: function(data) {
+            if (data.total === 0) {
+                $('#floatingBarsG').toggle();
+                $('.fail').toggle();
+                x.innerHTML = 'There is no Java for you.';
+                watchHomeButton();
+
+            } else {
             $('.map-box').toggle();
             mapResize();
             $('.search-area, #floatingBarsG').toggle();
             renderMap(data);
+            }
         }
     });
 }
@@ -142,13 +150,13 @@ function renderMap(data, resize) {
     map.addControl(L.mapquest.control());
     pinYourLocation(map);
     populateMap(data, map);
-    $("#map").trigger("resize");
+    $('#map').trigger('resize');
 }
 
 
 // This is to resize Mapquest 
 function mapResize() {
-    $(window).on("resize", function () { $("#map").height($(window).height()-65);}).trigger("resize");
+    $(window).on('resize', function () { $('#map').height($(window).height()-65);}).trigger('resize');
 }
 
 
@@ -165,7 +173,7 @@ function pinYourLocation(map) {
             size: 'sm',
         },
     }).addTo(map);
-    $("#mapid").trigger("resize");
+    $('#mapid').trigger('resize');
 }
 
 
@@ -184,7 +192,7 @@ function populateMap(data, map) {
                 secondaryColor: '#333333',
                 size: 'sm',
             },
-        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br><a target="_blank" aria-label='Read more about ${business.name} on Yelp' href=${business.url}>Yelp</a>`).openPopup().addTo(map);
+        }).bindPopup(`${business.name} <br>Rating: ${business.rating}/5 <br>Reviews: ${business.review_count} <br><a target='_blank' aria-label='Read more about ${business.name} on Yelp' href=${business.url}>Yelp</a>`).openPopup().addTo(map);
     });
     watchHomeButton();  
 };
