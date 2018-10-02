@@ -19,7 +19,7 @@ Home Page
 Results Page
 ![Results Page](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/screenshots/results_page_final.PNG)
 
-Popup Details
+Popup Details  
 ![Popup Details](https://github.com/rusye/Late-Night-Coffee-Tea/blob/master/screenshots/popup_details.PNG)
 
 ## Demo
