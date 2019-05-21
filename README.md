@@ -1,6 +1,6 @@
 # Late night coffee and tea search
 
-This app will help you locate a coffeehouse or a teahouse in your area that is currently open and within a 5 mile radius of you.  
+It is 8 pm and I want to find a coffee or tea house that is open late night within a 5 mile radius of my location. 
 
 ## Motivation
 
